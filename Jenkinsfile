@@ -7,12 +7,25 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
+    environmentv{
+        def appVersion = '' // global variable which can be accessed anywhere within the file
+    }
     stages {
+        stage('Read The Version'){
+            steps {
+                script{
+                    def packageJson = readJSON file: 'package.json'
+                    appVersion = packageJson.version
+                    echo "application version: $appVersion"
+                }
+            }
+        }
         stage('Installing Dependencies') {
             steps {
                 sh """
                 npm install
                 ls -ltr
+                echo "application version: $appVersion"
                 """
             }
         }
