@@ -7,7 +7,7 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    environmentv{
+    environment{
         def appVersion = '' // global variable which can be accessed anywhere within the file
     }
     stages {
