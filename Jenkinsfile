@@ -30,15 +30,26 @@ pipeline {
                 """
             }
         }
-        stage('Build'){
-            steps {
+        stage('Build'){ // ziping dependencies and version of the backend
+            steps { 
                 sh """
                 zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
                 ls -ltr
                 """
             }
         }
-        stage('Nexus Artifact Uploader'){
+        stage('Sonar Scan') {
+            environment {
+                scannerHome = tool 'sonar-6.0' // refering scanner CLI
+            }
+            steps {
+                script {
+                    withSonarQubeEnv('sonar-6.0') { // refering sonar server 
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        stage('Nexus Artifact Uploader'){ // uploading the backend zip to the nexus repository(backend)
             steps {
                 script {
                     nexusArtifactUploader(
@@ -60,13 +71,13 @@ pipeline {
                 }
             }
         }
-        stage('Deploy'){
+        stage('Deploy'){ //transfering build job backend to backend-deploy and passing appVersion as input to the backend-deploy(pipeline)
             steps {
                 script {
                     def params = [
                     string(name: 'appVersion', value: "${appVersion}")
                 ]
-                    build job: 'backend-deploy', parameters: params, wait: false
+                    build job: 'backend-deploy', parameters: params, wait: false  // when we include wait:false upstream job won't wait for downstream job
                      
                 }
             }
