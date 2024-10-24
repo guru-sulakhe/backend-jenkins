@@ -49,6 +49,7 @@ pipeline {
                     }
                 }
             }
+        }
         stage('Nexus Artifact Uploader'){ // uploading the backend zip to the nexus repository(backend)
             steps {
                 script {
@@ -96,4 +97,3 @@ pipeline {
         }
       }
     }
-}
