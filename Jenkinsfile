@@ -53,13 +53,13 @@ pipeline {
                 }
             }
         }
-        // stage("Quality Gate") {
-        //     steps {
-        //       timeout(time: 30, unit: 'MINUTES') {
-        //         waitForQualityGate abortPipeline: true
-        //       }
-        //     }
-        //   }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 30, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
         stage('Nexus Artifact Uploader'){ // uploading the backend zip to the nexus repository(backend)
             steps {
                 script {
