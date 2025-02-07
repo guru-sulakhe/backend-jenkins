@@ -27,7 +27,7 @@ spec:
     spec:
     containers:
     - name: backend
-      image: 637423540068.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest:{{ .Values.deployment.imageVersion }}
+      image: 637423540068.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest:{{ .Values.deployment.imageVersion }} #ecr repository expense-backend image
       envFrom:
       - configMapRef:
           name: backend #your configmap name
