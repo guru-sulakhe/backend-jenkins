@@ -13,6 +13,8 @@ pipeline {
     environment{
         def appVersion = '' // global variable which can be accessed anywhere within the file
         nexusUrl = 'nexus.guru97s.cloud:8081'
+        region = 'us-east-1'
+        account_id = '637423540068'
     }
     stages {
         stage('Read The Version'){
@@ -41,10 +43,24 @@ pipeline {
                 """
             }
         }
-        stage('Docker Build'){
+        stage('Docker Build'){ //login to ecr and pushing images into ecr
             steps {
                 sh """
-                docker build -t backend:${appVersion} .
+                aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
+
+                docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion} .
+
+                docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
+
+                """
+
+            }
+        }
+        stage('Deploy'){ //login to ecr and pushing images into ecr
+            steps {
+                sh """
+                
+
                 """
 
             }
