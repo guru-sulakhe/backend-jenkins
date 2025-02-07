@@ -1,0 +1,9 @@
+# a configMap is used to store non-confidential data in key-value pairs.
+# This will helps in connecting to db-host from backend i..e ensuring connection to db
+kind: configMap
+apiVersion: v1
+metadata: 
+  name: backend
+  namespace: expense
+data:
+  DB_HOST: db-dev.guru97s.cloud #mysql service component service name
