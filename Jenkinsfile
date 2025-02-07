@@ -57,7 +57,7 @@ pipeline {
             }
         }
         stage('Deploy'){ //deploying the application by implementing helm kubernetes
-            steps {
+            steps { //after the first installment of helm, mention helm upgrade backend . in the pipeline 
                 sh """
                     aws eks update-kubeconfig --region us-east-1 --name expense-dev
                     cd helm
