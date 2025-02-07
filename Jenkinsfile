@@ -38,19 +38,19 @@ pipeline {
         stage('Build'){ // ziping dependencies and version of the backend into a .zip file
             steps { 
                 sh """
-                zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
-                ls -ltr
+                    zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
+                    ls -ltr
                 """
             }
         }
         stage('Docker Build'){ //login to ecr and pushing images into ecr
             steps {
                 sh """
-                aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
+                    aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
 
-                docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion} .
+                    docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion} .
 
-                docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
+                    docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
 
                 """
 
@@ -59,9 +59,9 @@ pipeline {
         stage('Deploy'){ //login to ecr and pushing images into ecr
             steps {
                 sh """
-                cd helm
-                sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
-
+                    cd helm
+                    sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
+                    helm install backend .
                 """
 
             }
