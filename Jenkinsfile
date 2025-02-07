@@ -29,9 +29,9 @@ pipeline {
         stage('Installing Dependencies') {
             steps {
                 sh """
-                npm install
-                ls -ltr
-                echo "application version: $appVersion"
+                    npm install
+                    ls -ltr
+                    echo "application version: $appVersion"
                 """
             }
         }
