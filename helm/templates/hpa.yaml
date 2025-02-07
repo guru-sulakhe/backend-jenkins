@@ -17,4 +17,4 @@ spec:
       name: cpu
       target:
         type: Utilization #if averageUtilization of server shoud less than 50 or else it will create new pod
-        averageUtilization: 50
+        averageUtilization: 70
