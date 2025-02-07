@@ -21,7 +21,7 @@ pipeline {
                     def packageJson = readJSON file: 'package.json'
                     appVersion = packageJson.version
                     echo "application version: $appVersion"
-                }
+                } 
             }
         }
         stage('Installing Dependencies') {
@@ -39,6 +39,14 @@ pipeline {
                 zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
                 ls -ltr
                 """
+            }
+        }
+        stage('Docker Build'){
+            steps {
+                sh """
+                docker build -t backend:${appVersion} .
+                """
+
             }
         }
         // stage('Sonar Scan') {
@@ -98,7 +106,7 @@ pipeline {
     //             }
     //         }
     //     }
-    // }
+    }
         post { 
         always { 
             echo 'I will always say Hello again!'
