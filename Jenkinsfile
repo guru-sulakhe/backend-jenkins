@@ -56,11 +56,11 @@ pipeline {
 
             }
         }
-        stage('Deploy'){ //login to ecr and pushing images into ecr
+        stage('Deploy'){ //deploying the application by implementing helm kubernetes
             steps {
                 sh """
                     cd helm
-                    sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
+                    sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml 
                     helm install backend .
                 """
 
