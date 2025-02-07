@@ -59,7 +59,8 @@ pipeline {
         stage('Deploy'){ //login to ecr and pushing images into ecr
             steps {
                 sh """
-                
+                cd helm
+                sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
 
                 """
 
