@@ -8,4 +8,7 @@ def configMap = [
     project: "expense"
 
 ]
+//calling pipelineDecision.groovy of decidePipeline() function
 pipelineDecision.decidePipeline(configMap)
+
+// when you execute this on pipeline it will automatically invoke pipelineDecision.groovy and also invoke the decidePipeline() function present in it
