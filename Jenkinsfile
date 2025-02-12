@@ -1,8 +1,9 @@
 @Library('Jenkins-shared-library') _
-
+//Library will helps in calling another pipeline from present pipeline
+//If a pipeline is including @Library means that it will call another pipeline during execution
 // create a variable of map type and set the values
 
-def configMap = [
+def configMap = [ //this will call nodejsEKS.groovy pipeline
     type: "nodejsEKS"
     component: "backend"
     project: "expense"
