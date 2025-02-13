@@ -9,8 +9,7 @@ def configMap = [ //this will call nodejsEKS.groovy pipeline
     project: "expense"
 
 ]
-sh "environment: ${env}"
 // calling pipelineDecision.groovy of decidePipeline() function
-//pipelineDecision.decidePipeline(configMap)
+pipelineDecision.decidePipeline(configMap)
 
 // when you execute this on pipeline it will automatically invoke pipelineDecision.groovy and also invoke the decidePipeline() function present in it
