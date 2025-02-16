@@ -27,7 +27,7 @@ spec:
     spec:
     containers:
     - name: backend
-      imagePullPolicy: always #if you don't include it then it will take the error image always
+      imagePullPolicy: Always #if you don't include it then it will take the error image always
       image: 637423540068.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest:{{ .Values.deployment.imageVersion }} #ecr repository expense-backend image
       envFrom:
       - configMapRef:
