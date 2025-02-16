@@ -7,7 +7,7 @@ metadata:
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
-    kind: Deployment #your frontend type
+    kind: Deployment #your backend type
     name: backend #your deployment name
   minReplicas: 1
   maxReplicas: 10
