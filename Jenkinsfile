@@ -11,7 +11,7 @@ def configMap = [ //this will call nodejsEKS.groovy pipeline
 ]
 // calling pipelineDecision.groovy of decidePipeline() function
 if ( ! env.BRANCH_NAME.equalsIgnoreCase('main')){ //checking branch of the pipeline is not main branch 
-    pipelineDecision.decidePipeline(configMap)
+    pipelineDecision.decidePipeline(configMap)  //filename.functionName(configmap)
 }
 else { //if it is main then this will run
     echo "Proceed with CR or Non-Prod pipeline"
